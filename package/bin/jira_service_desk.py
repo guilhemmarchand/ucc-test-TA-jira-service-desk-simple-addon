@@ -7,12 +7,12 @@ import os
 import sys
 
 from splunktaucclib.alert_actions_base import ModularAlertBase
-import modalert_jira_open_issue_helper
+import modalert_jira_service_desk_helper
 
-class AlertActionWorkerjira_open_issue(ModularAlertBase):
+class AlertActionWorkerjira_service_desk(ModularAlertBase):
 
     def __init__(self, ta_name, alert_name):
-        super(AlertActionWorkerjira_open_issue, self).__init__(ta_name, alert_name)
+        super(AlertActionWorkerjira_service_desk, self).__init__(ta_name, alert_name)
 
     def validate_params(self):
 
@@ -30,7 +30,7 @@ class AlertActionWorkerjira_open_issue(ModularAlertBase):
         try:
             if not self.validate_params():
                 return 3
-            status = modalert_jira_open_issue_helper.process_event(self, *args, **kwargs)
+            status = modalert_jira_service_desk_helper.process_event(self, *args, **kwargs)
         except (AttributeError, TypeError) as ae:
             self.log_error("Error: {}. Please double check spelling and also verify that a compatible version of Splunk_SA_CIM is installed.".format(str(ae)))#ae.message replaced with str(ae)
             return 4
@@ -45,5 +45,5 @@ class AlertActionWorkerjira_open_issue(ModularAlertBase):
         return status
 
 if __name__ == "__main__":
-    exitcode = AlertActionWorkerjira_open_issue("TA-jira-service-desk-simple-addon", "jira_open_issue").run(sys.argv)
+    exitcode = AlertActionWorkerjira_service_desk("TA-jira-service-desk-simple-addon", "jira_service_desk").run(sys.argv)
     sys.exit(exitcode)

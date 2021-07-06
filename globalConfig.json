@@ -41,7 +41,7 @@
                             "options": {
                                 "placeholder": "Required"
                             },
-                            "field": "jira_env",
+                            "field": "name",
                             "help": "Enter a unique name for this account.",
                             "required": true
                         },
@@ -319,9 +319,9 @@
     },
     "alerts": [
         {
-            "name": "jira_open_issue",
-            "label": "Open issues in JIRA",
-            "description": "Use this action to open issues in your JIRA products",
+            "name": "jira_service_desk",
+            "label": "Open an issue in JIRA Service Desk",
+            "description": "JIRA Service Desk",
             "activeResponse": {
                 "task": [
                     "Create",
@@ -329,23 +329,23 @@
                 ],
                 "supportsAdhoc": true,
                 "subject": [
-                    "endpoint"
+                    "incident"
                 ],
                 "category": [
-                    "Information Conveyance",
-                    "Information Portrayal"
+                    "Ticketing system",
+                    "Incident management"
                 ],
                 "technology": [
                     {
                         "version": [
                             "1.0.0"
                         ],
-                        "product": "Test Incident Update",
-                        "vendor": "Splunk"
+                        "product": "JIRA Service Desk",
+                        "vendor": "Atlasian"
                     }
                 ],
                 "drilldownUri": "search?q=search%20index%3D\"_internal\"&earliest=0&latest=",
-                "sourcetype": "test:incident"
+                "sourcetype": "jira:service_desk_alert_action"
             },
             "entity": [
                 {
@@ -360,7 +360,7 @@
                     "type": "singleSelectSplunkSearch",
                     "label": "Select Account",
                     "field": "account",
-                    "search": "| rest /servicesNS/nobody/TA-SNOW/admin/TA_SNOW_account | dedup title",
+                    "search": "| rest splunk_server=local /servicesNS/nobody/TA-jira-service-desk-simple-addon/ta_service_desk_simple_addon_account | dedup title",
                     "valueField": "title",
                     "labelField": "title",
                     "help": "Select the account from the dropdown",
@@ -373,7 +373,7 @@
         "apiVersion": "3.2.0",
         "name": "TA-jira-service-desk-simple-addon",
         "restRoot": "ta_service_desk_simple_addon",
-        "version": "0.0.0Rb3d89d2",
+        "version": "0.0.0R87170c1",
         "displayName": "JIRA Service Desk simple addon",
         "schemaVersion": "0.0.2"
     }

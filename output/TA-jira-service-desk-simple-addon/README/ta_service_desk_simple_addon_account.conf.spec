@@ -1,5 +1,4 @@
 [<name>]
-jira_env = 
 jira_url = 
 jira_default_account = 
 configuration_help_link = 

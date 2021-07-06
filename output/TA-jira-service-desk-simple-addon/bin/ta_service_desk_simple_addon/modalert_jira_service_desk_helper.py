@@ -23,8 +23,8 @@ def process_event(helper, *args, **kwargs):
     # and writes them to Splunk
     # NOTE: Call helper.writeevents() only once after all events
     # have been added
-    helper.addevent("hello", sourcetype="test:incident")
-    helper.addevent("world", sourcetype="test:incident")
+    helper.addevent("hello", sourcetype="jira:service_desk_alert_action")
+    helper.addevent("world", sourcetype="jira:service_desk_alert_action")
     helper.writeevents(index="summary", host="localhost", source="localhost")
 
     # The following example gets the events that trigger the alert
@@ -38,7 +38,7 @@ def process_event(helper, *args, **kwargs):
     [sample_code_macro:end]
     """
 
-    helper.log_info("Alert action jira_open_issue started.")
+    helper.log_info("Alert action jira_service_desk started.")
 
     # TODO: Implement your alert action logic here
     return 0
