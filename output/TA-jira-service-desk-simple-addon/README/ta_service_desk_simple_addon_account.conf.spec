@@ -1,8 +1,7 @@
 [<name>]
 jira_url = 
-jira_default_account = 
 configuration_help_link = 
-account_radio = 
+jira_ssl_certificate_validation = 
 jira_ssl_certificate_path = 
 username = 
 password = 

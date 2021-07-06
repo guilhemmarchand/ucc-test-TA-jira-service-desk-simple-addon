@@ -23,13 +23,6 @@ fields = [
         validator=None
     ), 
     field.RestField(
-        'jira_default_account',
-        required=False,
-        encrypted=False,
-        default=None,
-        validator=None
-    ), 
-    field.RestField(
         'configuration_help_link',
         required=False,
         encrypted=False,
@@ -37,7 +30,7 @@ fields = [
         validator=None
     ), 
     field.RestField(
-        'account_radio',
+        'jira_ssl_certificate_validation',
         required=True,
         encrypted=False,
         default='yes',

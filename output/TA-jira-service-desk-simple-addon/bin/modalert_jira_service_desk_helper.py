@@ -48,10 +48,50 @@ def process_event(helper, *args, **kwargs):
     account = helper.get_param("account")
     helper.log_info("account={}".format(account))
 
-    jira_url = helper.settings["jira_url"]
-    helper.log_info("jira_url={}".format(jira_url)
+    # Retrieve the session_key
+    helper.log_debug("Get session_key.")
+    session_key = helper.session_key
 
+    import solnlib
 
+    app = 'TA-jira-service-desk-simple-addon'
+    account_cfm = solnlib.conf_manager.ConfManager(
+        session_key,
+        app,
+        realm="__REST_CREDENTIAL__#{}#configs/conf-ta_service_desk_simple_addon_account".format(app))
+    splunk_ta_account_conf = account_cfm.get_conf("ta_service_desk_simple_addon_account").get_all()
+    helper.log_info("account={}".format(splunk_ta_account_conf))
+
+    # account details
+    account_details = splunk_ta_account_conf[account]
+
+    # Get authentication type
+    auth_type = account_details.get("auth_type", 0)
+    helper.log_info("auth_type={}".format(auth_type))
+
+    # Get username
+    username = account_details.get("username", 0)
+    helper.log_info("username={}".format(username))
+
+    # Get passowrd
+    password = account_details.get("password", 0)
+    helper.log_info("password={}".format(password))
+
+    # Get jira_url
+    jira_url = account_details.get("jira_url", 0)
+    helper.log_info("jira_url={}".format(jira_url))
+
+    # Get jira_ssl_certificate_validation
+    jira_ssl_certificate_validation = account_details.get("jira_ssl_certificate_validation", 0)
+    helper.log_info("jira_ssl_certificate_validation={}".format(jira_ssl_certificate_validation))
+
+    # Get jira_ssl_certificate_path
+    jira_ssl_certificate_path = account_details.get("jira_ssl_certificate_path", 0)
+    helper.log_info("jira_ssl_certificate_path={}".format(jira_ssl_certificate_path))
+
+    # Get Passthrough mode
+    jira_passthrough_mode = helper.get_global_setting("jira_passthrough_mode")
+    helper.log_info("jira_passthrough_mode={}".format(jira_passthrough_mode))
 
 
     return 0
